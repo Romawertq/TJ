@@ -31,8 +31,6 @@ public class TelegramBots extends TelegramLongPollingBot {
             firstWord = parts[0];
         }
 
-
-
         switch (firstWord){
             case "/start":
                 sendMessage("Добро пожаловать, господи я заебался");
