@@ -1,6 +1,7 @@
 package com.Romawertq.bot;
 
 import com.Romawertq.Main;
+import com.Romawertq.db;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -24,6 +25,7 @@ public class TelegramBots extends TelegramLongPollingBot {
         String firstWord = "";
         String input = update.getMessage().getText();
         String[] parts = input.split(" ");
+
         if (parts.length == 0) {
             System.out.println("Пустая строка");
         }
@@ -31,7 +33,29 @@ public class TelegramBots extends TelegramLongPollingBot {
             firstWord = parts[0];
         }
 
+
         switch (firstWord){
+            case "/db":
+                if (parts.length >= 4){
+                    String user = parts[1];
+                    String pass = parts[2];
+                    String email = parts[3];
+                    if (parts.length == 5){
+                        String admin = parts[4];
+                        db.register_user(user, email, pass, admin);
+                        sendMessage("Ваши данные были успешно добавлены, слава!");
+                    }
+                    else{
+                        String admin = "ddd";
+                        db.register_user(user, email, pass, admin);
+                        sendMessage("Ваши данные были успешно добавлены");
+                    }
+
+                }
+                else{
+                    sendMessage("Не правильно");
+                }
+                break;
             case "/start":
                 sendMessage("Добро пожаловать, господи я заебался");
                 break;
